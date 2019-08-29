@@ -1,13 +1,14 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var exphbs = require("express-handlebars");
+
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
 var axios = require("axios");
 var cheerio = require("cheerio");
+
 
 // Require all models
 var db = require("./models");
@@ -27,40 +28,70 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
+//Set the handlebars
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+
+
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/mongoScraper", { useNewUrlParser: true });
 
 // Routes
+app.get("/", (req, res) => {
 
+    db.Article.find({})
+        .then(function (Article) {
+
+            console.log(Article);
+
+            res.render("index", {
+                Article: Article
+            });
+        })
+        .catch((err) => {
+            res.json(err);
+        })
+
+})
 // A GET route for scraping the echoJS website
-app.get("/", function (req, res) {
+app.get("/scrape", function (req, res) {
     // First, we grab the body of the html with axios
-    axios.get("https://www.scientificamerican.com/").then(function (response) {
+    axios.get("https://www.scientificamerican.com/section/lateststories/").then(function (response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(response.data);
 
         // Now, we grab every h2 within an article tag, and do the following:
-        $("article h2").each(function (i, element) {
+        $("article").each(function (i, element) {
+
             // Save an empty result object
             var result = {};
 
             // Add the text and href of every link, and save them as properties of the result object
             result.title = $(this)
-                .children("a")
+                .find("h2")
+                .children()
                 .text();
             result.link = $(this)
-                .children("a")
+            .find("h2")
+                .children()
                 .attr("href");
             result.picture = $(this)
-                .children("a")
-                .attr("href");
-
-
+            .find("picture")
+                .children("img")
+                .attr("src");
+            // result.picture = $("div.t_thumb a picture img", this)
+            //    // .children("img")
+            //     .attr("src");
+            // console.log(result.picture);
+            //  console.log($("div.t_thumb a picture img", this).length)
+            console.log(result)
             // Create a new Article using the `result` object built from scraping
             db.Article.create(result)
                 .then(function (dbArticle) {
                     // View the added result in the console
-                    console.log(dbArticle);
+                    // console.log(dbArticle);
                 })
                 .catch(function (err) {
                     // If an error occurred, log it
@@ -69,7 +100,7 @@ app.get("/", function (req, res) {
         });
 
         // Send a message to the client
-        res.send("Scrape Complete");
+        res.render("index");
     });
 });
 
@@ -78,8 +109,12 @@ app.get("/articles", function (req, res) {
     // Grab every document in the Articles collection
     db.Article.find({})
         .then(function (dbArticle) {
+            var hbsObject = {
+                articles: dbArticle
+            };
             // If we were able to successfully find Articles, send them back to the client
-            res.json(dbArticle);
+            res.render("index", hbsObject);
+            // console.log(dbArticle);
         })
         .catch(function (err) {
             // If an error occurred, send it to the client
