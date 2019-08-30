@@ -27,6 +27,11 @@ var ArticleSchema = new Schema({
   picture: {
       type: String,
       required: true
+  },
+
+  summary: {
+    type: String,
+    required: true
   }
 });
 

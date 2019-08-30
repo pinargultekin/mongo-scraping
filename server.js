@@ -81,6 +81,10 @@ app.get("/scrape", function (req, res) {
             .find("picture")
                 .children("img")
                 .attr("src");
+            result.summary = $(this)
+            .find(".listing-wide__inner")
+                .children("p")
+                .text();
             // result.picture = $("div.t_thumb a picture img", this)
             //    // .children("img")
             //     .attr("src");

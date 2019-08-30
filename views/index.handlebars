@@ -1,58 +1,104 @@
- <meta charset="UTF-8">
+{{!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+  
+   <link rel="stylesheet" href="/assets/css/style.css" type="text/css" /> --}}
+
 
 <div id="wrapper">
-    <div class="jumbotron text-center">
-        <h1>Scientific American News Feed</h1>
-        
-    </div>
-<div class="nav">
-<ul class="nav justify-content-end">
-  <li class="nav-item">
-    <a class="nav-link active" href="/scrape">Scrape Articles</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="/articles">All Articles</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/favs">Favorite Articles</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/notes">Notes</a>
-  </li>
-  </ul>
+  <div class="jumbotron text-center">
+    <h1>Scientific American News Feed</h1>
 
-</div>
-<br>
-<br>
-    <div id="articles">
-        {{#each articles}}
-        <div class="card mb-3" >
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src={{picture}} class="card-img" alt={{title}}>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h3 class="card-title">{{title}}</h3>
-        <p class="card-text">{{link}}</p>
-        <div class="card-text">
-        <button type="button" class="btn btn-outline-warning">Add Favorites</button>
-        <button type="button" class="btn btn-outline-info">Add Note</button>
+  </div>
+  <div class="nav">
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link active" href="/scrape">Scrape Articles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/articles">All Articles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/favs">Favorite Articles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/notes">Notes</a>
+      </li>
+    </ul>
+
+  </div>
+  <br>
+  <br>
+  <div id="articles">
+    {{#each articles}}
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src={{picture}} class="card-img" alt={{title}}>
         </div>
-        
-        {{!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title">{{title}}</h3>
+            <p class="card-text summary">{{summary}}</p>
+            <p class="card-text" href="{{link}}">{{link}}</p>
+            <div class="card-text">
+              <button type="button" class="btn btn-outline-warning favs">Add Favorites</button>
+              <button type="button" class="btn btn-outline-info notes" data-toggle="modal" data-target="#notes"
+                data-id="{{this._id}}" id="savenote">Add Note</button>
+            </div>
+
+            {{!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-</div>
-</div>
 
-{{/each}}
-</div>
-<div id="notes"></div>
+    {{/each}}
+  </div>
 
+  {{!-- Notes Modal --}}
+
+  {{!-- <div class="modal" id="notes" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Notes: </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body note-text">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-warning">Save changes</button>
+        {{!-- <button type="button" class="btn btn-outline-info notes" data-dismiss="modal">Close</button> --}}
+</div>
+</div>
+</div>
+</div>
+</div> --}}
+
+<div class="modal fade" id="notes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">- Notes -</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="md-form">
+        {{!-- <i class="fas fa-pencil prefix grey-text"></i> --}}
+        <textarea type="text" id="note-text" class="md-textarea form-control" rows="4"></textarea>
+        <label data-error="wrong" data-success="right" for="note-text">Your notes</label>
+      </div>
+<div class="modal-footer d-flex justify-content-center">
+      <button type="button" class="btn btn-outline-warning">Save</button>
+    </div>
+    </div>
+    
+  </div>
 </div>

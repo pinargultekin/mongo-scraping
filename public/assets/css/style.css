@@ -1,3 +1,36 @@
-.jumbotron{
-    background-color: #FFA625;
+.jumbotron {
+  background-color: #ffa625;
+}
+.btn-outline-info {
+  border: 2px solid #8849cc !important;
+  color: #8849cc!important;
+  border-color: #8849cc!important;
+}
+a {
+  color: #6749cc;
+  font-size: 18px;
+}
+h1 {
+  color: #6749cc;
+  font-family: "Neuton", serif;
+  font-size: 50px;
+  font-weight: 500;
+}
+
+a:hover {
+  color: #ffa625;
+}
+.card-title {
+  font-family: "Kanit", sans-serif;
+}
+.card-text {
+  font-family: "Hind Vadodara", sans-serif;
+}
+.summary {
+  font-size: 20px;
+}
+.btn-outline-info:hover {
+    border: 2px solid #8849cc !important;
+    color: #8849cc!important;
+    border-color: #8849cc!important;
 }
