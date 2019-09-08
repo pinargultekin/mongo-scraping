@@ -1,28 +1,31 @@
- <div class="jumbotron text-center">
+  <div class="jumbotron text-center">
     <h1>Scientific American News Feed</h1>
-    <h2>All Articles</h2>
+    <h2>Scraped Articles</h2>
   </div>
   {{!-- Nav bar --}}
   <div class="nav">
     <ul class="nav justify-content-end">
       <li class="nav-item">
-        <a class="nav-link active" href="/">Home</a>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link active" id="scrape-button" href="/scrape">Scrape Articles</a>
+        <a class="nav-link active" href="/saved">Saved Articles</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/saved">All Articles</a>
+        <a class="nav-link active" href="/">Home</a>
       </li>
+      {{!-- <li class="nav-item">
+        <a class="nav-link" href="/favs">Favorite Articles</a>
+      </li> --}}
+      {{!-- <li class="nav-item">
+        <a class="nav-link" href="/notes">Comments</a>
+      </li> --}}
     </ul>
 
   </div>
   <br>
   <br>
 
-  {{!-- Article List --}}
-  <div id="articles" data-id="{{this._id}}">
-    {{#each saved}}
+{{!-- Article List --}}
+  <div id="articles">
+    {{#each articles}}
     <div class="card mb-3">
       <div class="row no-gutters">
         <div class="col-md-4">
@@ -35,8 +38,7 @@
             <a class="card-text link" id="link-{{@index}}" target="_blank" href="{{link}}">{{link}}</a>
            
             <div class="card-text">
-              <button data-id={{this._id}} class="btn btn-outline-info delete-article">Delete Article</button>
-                <button data-id={{this._id}} class="btn btn-outline-warning note-comment">Add Comment</button>
+              <button data-id={{@index}} class="save-article btn btn-outline-info">Save</button>
               
             </div>
           </div>
@@ -45,5 +47,3 @@
     </div>
     {{/each}}
     </div>
-
-

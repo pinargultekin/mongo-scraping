@@ -3,8 +3,8 @@
 }
 .btn-outline-info {
   border: 2px solid #8849cc !important;
-  color: #8849cc!important;
-  border-color: #8849cc!important;
+  color: #8849cc !important;
+  border-color: #8849cc !important;
 }
 a {
   color: #6749cc;
@@ -15,6 +15,11 @@ h1 {
   font-family: "Neuton", serif;
   font-size: 50px;
   font-weight: 500;
+}
+h2 {
+  color: #a887ca;
+  font-family: "Neuton", serif;
+  font-size: 40px;
 }
 
 a:hover {
@@ -30,7 +35,35 @@ a:hover {
   font-size: 20px;
 }
 .btn-outline-info:hover {
-    border: 2px solid #8849cc !important;
-    color: #8849cc!important;
-    border-color: #8849cc!important;
+  border: 2px solid #8849cc !important;
+  color: #8849cc !important;
+  border-color: #8849cc !important;
 }
+.form-group{
+    padding: 5px;
+    margin: 5px;
+}
+
+.pic{
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/science.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.pic-text{
+    text-align: center;
+    top: 50%;
+    left:50%;
+    margin: 24px;
+    padding: 24px;
+}
+
+
+
+
+
+
