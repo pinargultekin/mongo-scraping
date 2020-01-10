@@ -15,9 +15,13 @@ $(document).on("click", ".delete-article", function() {
       url: "/saved/" + thisId
     })
     .then(function(data) {
-      // Log the response
+      let alert = $(".alert-danger2").show(); 
+      setTimeout(function(){
+       alert;
+       // Log the response
       console.log(data);
       location.reload();
+      }, 1000); 
     });
 });
 
@@ -63,9 +67,16 @@ $(document).on("click", ".note-comment", function() {
       }
     })
       .then(function(data) {
-        // Log the response
-        console.log(data);
-        window.location.replace("/articles/" + data._id);
+        let alert = $(".alert-success").show(); 
+        setTimeout(function(){
+         alert;
+         // Log the response
+         console.log(data);
+        location.reload();
+         // window.location.replace("/articles/" + data._id);
+        }, 2000); 
+        
+        
       });  
       // Also, remove the values entered in the input and textarea for note entry
       $("#title-note").val("");
@@ -80,8 +91,12 @@ $(document).on("click", ".note-comment", function() {
       url: "/articles/" + thisId
     })
     .then(function(data) {
-      // Log the response
+      let alert = $(".alert-danger").show(); 
+      setTimeout(function(){
+       alert;
+       // Log the response
       console.log(data);
       location.reload();
+      }, 1000); 
     }); 
 });
