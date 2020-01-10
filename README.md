@@ -25,8 +25,11 @@ The application is built with;
 * JavaScript
 * jQuery
 
-To run the site you can download/clone my repo and run the site by using 
-### `nodemon server.js`
+Install locally to see the website:
+### `git clone git@github.com:pinargultekin/mongo-scraping.git`
+### `cd mongo-scraping`
+### `npm install`
+### `nodemon server.js` or `npm start`
 
 <a name="display"></a>
 ## Application Display
